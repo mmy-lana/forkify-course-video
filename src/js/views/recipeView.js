@@ -2,7 +2,8 @@ import View from './View.js';
 
 // import icons from '../img/icons.svg'; //Parcel 1
 import icons from 'url:../../img/icons.svg'; //Parcel 2
-import { Fraction } from 'fractional';
+// import { Fraction } from 'fractional'; // it's not working properly
+import { numberToFraction } from '../helpers.js';
 
 class RecipeView extends View {
   _parentElement = document.querySelector('.recipe');
@@ -133,15 +134,19 @@ class RecipeView extends View {
       <use href="${icons}#icon-check"></use>
     </svg>
     <div class="recipe__quantity">${
-      ing.quantity ? new Fraction(ing.quantity).toString() : ''
+      ing.quantity ? numberToFraction(ing.quantity).toString() : ''
     }</div>
     <div class="recipe__description">
-      <span class="recipe__unit">${ing.unit}</span>
-      ${ing.description}
+    <span class="recipe__unit">${ing.unit}</span>
+    ${ing.description}
     </div>
-  </li>
-  `;
+    </li>
+    `;
   }
 }
 
 export default new RecipeView();
+
+// {/* <div class="recipe__quantity">${
+//   ing.quantity ? new Fraction(ing.quantity).toString() : ''
+// }</div> */} ERROR from _generateMarkupIngredient
